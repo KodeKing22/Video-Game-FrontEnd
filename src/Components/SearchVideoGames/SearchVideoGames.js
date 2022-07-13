@@ -1,26 +1,25 @@
 import React, { useState } from "react";
 
-const SearchVideoGames = ({SearchVideoGames}) => {
+const SearchVideoGames = ({SearchForVideoGames}) => {
   const [name, setName] = useState("");
 
   function handleSubmit(event) {
     event.preventDefault();
     console.log(name)
-    array.SearchVideoGames(name);
+    SearchForVideoGames(name);
   }
 
   return (
     <form onSubmit={handleSubmit} className="form-grid">
       <div>
-        <label style={"centered"}>Seach Games By Name</label>
+        <label>Seach Games By Name</label>
         <input
           type="text"
           value={name}
           onChange={(event) => setName(event.target.value)}
           className="form-control"
-          style={"centered"}
-        />
-        <button type="submit" className="btn btn-primary" style={"centered"}>
+          />
+        <button type="submit" className="btn btn-primary">
           Search
         </button>
       </div>

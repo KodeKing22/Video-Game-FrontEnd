@@ -3,6 +3,7 @@ import axios from "axios";
 import "./App.css";
 import DisplayVideoGames from "./Components/DisplayVideoGames/DisplayVideoGames";
 import VideoGameChart from "./Components/VideoGameChart/VideoGameChart";
+import SearchVideoGames from "./Components/SearchVideoGames/SearchVideoGames";
 
 function App() {
   const [videoGames, setVideoGames] = useState([]);
@@ -15,20 +16,21 @@ function App() {
     getAllVideoGames();
   }, []);
 
-  function SearchVideoGames(searchTerm) {
+  function SearchForVideoGames(searchTerm) {
     let gamesByName = videoGames.filter((game) => {
       if (game.name.includes(searchTerm)) {
         return true;
       }
-      setVideoGames(gamesByName);
     });
+    console.log("Testing")
+    setVideoGames(gamesByName);
   }
 
   return (
     <div className="App">
       <DisplayVideoGames videoGames={videoGames} />
       <VideoGameChart videoGames={videoGames} />
-      <SearchVideoGames SearchVideoGames={SearchVideoGames} />
+      <SearchVideoGames SearchForVideoGames={SearchForVideoGames} />
     </div>
   );
 }
