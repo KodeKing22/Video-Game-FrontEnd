@@ -1,32 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./App.css";
+import DisplayVideoGames from "./Components/DisplayVideoGames/DisplayVideoGames";
+import VideoGameChart from "./Components/VideoGameChart/VideoGameChart";
 
 function App() {
+  const [videoGames, setVideoGames] = useState([]);
 
-  const [games, setGames] = useState([]);
-
-  async function getAllVideoGames(){
+  async function getAllVideoGames() {
     let response = await axios.get("http://localhost:8080/all");
-    setGames(response.data);
-    console.log(response.data);
+    setVideoGames(response.data);
   }
-  useEffect(() =>{
+  useEffect(() => {
     getAllVideoGames();
+  }, []);
 
-  },[])
-
-  async function SearchVideoGames(getGame){
-    let response = await axios.get("http://localhost:8080/all", getGame);
-    if(response.data);
-    await getAllVideoGames();
+  function SearchVideoGames(searchTerm) {
+    let gamesByName = videoGames.filter((game) => {
+      if (game.name.includes(searchTerm)) {
+        return true;
+      }
+      setVideoGames(gamesByName);
+    });
   }
-  
+
   return (
-    <div>
-      <h3>Platform By Global Sales in Millions</h3>
+    <div className="App">
+      <DisplayVideoGames videoGames={videoGames} />
+      <VideoGameChart videoGames={videoGames} />
+      <SearchVideoGames SearchVideoGames={SearchVideoGames} />
     </div>
-    
   );
 }
 
